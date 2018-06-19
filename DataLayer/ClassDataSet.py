@@ -1,5 +1,5 @@
-from Base.IDataSet import *
-from Base.TaggedImage import *
+from .Base.IDataSet import *
+from .Base.TaggedImage import *
 import csv
 import os
 import urllib
@@ -39,7 +39,7 @@ class ClassDataSet(IDataSet):
     def create_new_img(self, img_name, url, properties):
         return TaggedImageURL(img_name, url=url, properties=properties)
 
-    def next(self):
+    def __next__(self):
         if self.current > self.high:
             raise StopIteration
         else:

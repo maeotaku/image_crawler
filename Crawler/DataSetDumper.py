@@ -1,7 +1,9 @@
 import os
 import threading
 
-import HelperFunctions as hf
+def create_folder(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
 def get_new_uuid():
     return str(uuid.uuid1())
@@ -14,7 +16,7 @@ class DataSetDumper(object):
             self.MAX_THREADS = 3
 
         def _add_folder(self, path):
-            hf.create_folder(path)
+            create_folder(path)
 
         def _add_tagged_img(self, img, path):
             func = img.save
@@ -30,7 +32,7 @@ class DataSetDumper(object):
                 self.threads = []
 
         def generate(self):
-            hf.create_folder(self.dataset.destination_path)
+            create_folder(self.dataset.destination_path)
             for img in self.dataset:
                 if not img is None:
                     path = os.path.join(self.dataset.destination_path, img.get_property_name("Class"))

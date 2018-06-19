@@ -1,7 +1,7 @@
 import os
 import io
 import uuid
-import urllib2
+import urllib.request
 import xml.etree.cElementTree as ET
 from shutil import copyfile
 from PIL import Image, ImageFile
@@ -55,7 +55,7 @@ class TaggedImageURL(TaggedImage):
             img_path = os.path.join(path, self.img_name_raw)
             if not os.path.exists(img_path):
                 print("Downloading image...", self.url)
-                request = urllib2.urlopen(self.url, timeout=500)
+                request = urllib.request.urlopen(self.url, timeout=500)
                 img = Image.open(io.BytesIO(request.read()))
 
                 w = img.size[0]
